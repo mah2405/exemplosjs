@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Receitas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <style>
+        #pnlCatalogo {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: flex-start;
+            gap: 10px; 
+        }
+        .card {
+            margin: 10px; 
+            flex: 1 0 21%;
+            max-width: 450px;
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-body{
+            max-height: 515px;
+            overflow-y: auto;
+        }
+        @media (max-width:768px) {
+            .card{
+                flex-basis: 80%;
+            }
+        }
+    </style>
+</head>
+<body onload="preencheCatalogo()">
+    <div class="container-fluid">
+        <div class="bg-warning">
+            <div id="pnlCatalogo" class="d-flex flex-wrap">
+            </div>
+        </div>
+    </div>    
+
+    <script>
+        function getListaIngredientes(ingredientes) {
+            let listaHtml = '<ul>';
+            listaHtml += ingredientes.map(ingrediente => `<li>${ingrediente}</li>`).join('');
+            listaHtml += '</ul>';
+            return listaHtml;
+        }
+
+        function getCard(receita) {
+            const cardDiv = document.createElement('div');
+            cardDiv.className = 'card';
+            cardDiv.innerHTML = `
+                <img src="${receita.imagem}" class="card-img-top" alt="${receita.titulo}">
+                <div class="card-body">
+                    <h5 class="card-title">${receita.titulo}</h5>
+                    <div class="card-text">
+                        ${getListaIngredientes(receita.ingredientes)}
+                        <hr>
+                        <p>${receita.preparo.join('<br>')}</p>
+                    </div>
+                </div>
+            `;
+            return cardDiv;
+        }
+
+        const receitas = [
+            {
+                titulo: "Receita de Bolo de Chocolate",
+                imagem: "bolo-de-chocolate.jpg",
+                ingredientes: [
+                    "150 gramas ou três quartos de xícara de chá de açúcar",
+                    "160 gramas ou 1 xícara de chá de farinha de trigo",
+                    "130 gramas ou uma xícara de chá e um quarto de achocolatado em pó",
+                    "Meia colher de sopa de fermento em pó",
+                    "2 ovos",
+                    "Meia xícara de chá ou 120 mililitros de óleo",
+                    "Meia xícara de chá ou 120 mililitros de água quente"
+                ],
+    
+                preparo: [
+                        " 1 Em uma panela coloque 360 gramas de creme de leite fresco, 30 gramas de açúcar, 3 gemas e misture.",
+                        "2 Leve ao fogo baixo mexendo sem parar por cerca de 4 minutos ou até começar a borbulhar e engrossar.",
+                        "3 Apague o fogo, incorpore 150 gramas de chocolate meio amargo picado e misture até o chocolate derreter.",
+                        "4 Junte 1 xícara de chá e três quartos de bolo esfarelado e misture bem.",
+                        "5 Transfira para um liquidificador e bata até formar um creme liso por mais ou menos 1 minuto.",
+                        "6 Dica: se precisar, desligue o liquidificador, limpe as laterais com uma espátula e ligue novamente. Reserve."
+            ],
+            },
+            {
+                titulo: "Lasanha",
+                imagem: "lasanha.jpeg",
+                ingredientes: [
+                    "500 g de massa de lasanha",
+                    "500 g de carne moída",
+                    "2 caixas de creme de leite",
+                    "3 colheres de manteiga",
+                    "3 colheres de farinha de trigo",
+                    "500 g de presunto",
+                    "500 g de mussarela",
+                    "Sal a gosto",
+                    "2 copos de leite",
+                    "1 cebola ralada",
+                    "3 colheres de óleo",
+                    "Molho de tomate",
+                    "3 dentes de alho amassados",
+                    "1 pacote de queijo ralado"
+                ],
+                preparo: ["Lasanha",
+                        "1 Cozinhe a massa segundo as orientações do fabricante, despeje em um refratário com água gelada para não grudar e reserve.",
+                        "2 Molho à bolonhesa",
+                        "Refogue o alho, a cebola, a carne moída, o molho de tomate, deixe cozinhar por 3 minutos e reserve.",
+                        "3 Molho branco",
+                        "Derreta a margarina, coloque as 3 colheres de farinha de trigo e mexa.",
+                        "4 Despeje o leite aos poucos e continue mexendo.",
+                        "5 Por último, coloque o creme de leite, mexa por 1 minuto e desligue o fogo.",
+                        "6 Montagem",
+                        "Despeje uma parte do molho à bolonhesa em um refratário, a metade da massa, a metade do presunto, a metade da mussarela, todo o molho branco e o restante da massa.",
+                        "7 Repita as camadas até a borda do recipiente.",
+                        "8 Finalize com o queijo ralado e leve ao forno alto (220° C), preaquecido, por cerca de 20 minutos."
+            ],
+            },
+            {
+                titulo: "Fricassê de Frango",
+                imagem: "fricassedefrango.jpeg",
+                ingredientes: [
+                            "1 lata de creme de leite",
+                            "1 lata de milho verde",
+                            "requeijão",
+                            "1 copo de requeijão cremoso",
+                            "azeitona sem caroço",
+                            "100 g de azeitona sem caroço",
+                            "2 peitos de frango desfiados",
+                            "200 g de mussarela fatiada",
+                            "100 g de batata palha",
+                            "1 xícara de água",
+                            "1 pitada de sal"
+                ],
+                preparo: [
+                    "1 Bata no liquidificador o milho, o requeijão, o creme de leite e a água.",
+                    "2 Refogue o creme do liquidificador com o frango desfiado, as azeitonas e o sal até ficar com uma textura espessa.",
+                    "3 Coloque o refogado numa assadeira, cubra com mussarela e espalhe a batata palha por cima.",
+                    "4 Leve ao forno até borbulhar.",
+                    "5 Sirva com arroz branco."
+            ],
+            },
+       ]
+
+
+        function preencheCatalogo() {
+            const pnlCatalogo = document.getElementById('pnlCatalogo');
+            receitas.forEach(receita => {
+                pnlCatalogo.appendChild(getCard(receita));
+            });
+        }
+    </script>
+</body>
+</html>

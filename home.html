@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>ordenando Valores</title>
+</head>
+<style>
+    button:active {
+        background-color: rgb(51, 67, 172);
+        color: white;
+    }
+    body ul {
+        font-family: 'Arial', sans-serif;
+        text-align: auto;
+        padding: 0;
+    }
+    .title {
+        color: #333;
+        margin-bottom: 20px;
+    }
+    #valor, #algoritmoOrdenacao, button {
+        margin: 0px;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+    
+    #valores {
+        list-style-type: disc;
+        padding: 0;
+        margin-top: 0px;
+
+    }
+    #valores ul {
+        padding: 5px;
+        margin: 0;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+</style>
+<body>
+    <div class="container-fluid">      
+    <h1 class='title'>Ordenando valores</h1>
+    <label for="valor">valor:</label>
+    <ul><input type="number" id="valor"></ul>
+    <button onclick="add()">adicionar</button>
+    <hr>
+
+   <ul> <select id="algoritmoOrdenacao">
+        <option value="bubblesort" selected>bubble sort</option>
+        <option value="selectionsort">selection sort</option>
+        <option value="quicksort">quick sort</option>
+    </select></ul>
+  
+        <button onclick="ordenar()">ordenar</button>
+        <button onclick="misturar()">misturar</button>
+        <hr>
+        <li id="valores"></li>
+     
+    <script src="ordenando.js"></script>
+    <script>
+        function add(){
+            var valorInput = document.getElementById('valor').value;
+            var lista = document.getElementById('valores');
+            var node = document.createElement('li');
+            var textoNode = document.createTextNode(valorInput);
+            node.appendChild(textoNode);
+            lista.appendChild(node);
+            console.log('a função add foi adicionada.');
+        }
+        function ordenar() {
+            var lista = document.getElementById('valores');
+            var algoritmoOrdenacao = document.getElementById('algoritmoOrdenacao').value;
+            var itens = lista.children;
+            var valores = Array.from(itens).map(item => parseInt(item.textContent, 10));
+
+            switch (algoritmoOrdenacao) {
+                case 'bubblesort':
+                    bubble_sort(valores);
+                    break;
+                case 'selectionsort':
+                    selection_sort(valores);
+                    break;
+                case 'quicksort':
+                    quick_sort(valores, 0, valores.length - 1);
+                    break;
+                default:
+                    console.log('Algoritmo de ordenação não reconhecido.');
+            }
+
+    lista.innerHTML = valores.map(valor => `<li>${valor}</li>`).join('');
+}
+
+        function misturar(){
+            // Implementação da função de mistura virá aqui
+            console.log('a função misturar foi chamada');
+            var lista = document.getElementById('valores');
+            var itens = lista.children;
+            var valores = Array.from(itens).map(item => parseInt(item.textContent, 10));
+            shuffle(valores);
+            lista.innerHTML = valores.map(valor => `<li>${valor}</li>`).join('');
+        }
+    </script>
+    </div>
+</body>
+</html>

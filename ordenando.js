@@ -1,5 +1,3 @@
-// Funções de ordenação e embaralhamento
-
 const swap = (vetor, i, j) => {
     [vetor[i], vetor[j]] = [vetor[j], vetor[i]];
   };
@@ -57,8 +55,7 @@ const swap = (vetor, i, j) => {
     swap(vetor, i + 1, fim);
     return i + 1;
   };
-  
-  // Função 'add' para adicionar valores à lista
+
   function add() {
     var valorInput = document.getElementById('valor').value;
     var ul = document.getElementById('valores');
@@ -67,7 +64,6 @@ const swap = (vetor, i, j) => {
     ul.appendChild(li);
   }
   
-  // Função 'ordenar' para ordenar os valores da lista
   function ordenar() {
     var lista = document.getElementById('valores');
     var algoritmoOrdenacao = document.getElementById('algoritmoOrdenacao').value;
@@ -91,7 +87,6 @@ const swap = (vetor, i, j) => {
     lista.innerHTML = valores.map(valor => `<li>${valor}</li>`).join('');
   }
   
-  // Função 'misturar' para embaralhar os valores da lista
   function misturar() {
     var lista = document.getElementById('valores');
     var itens = lista.children;
